@@ -24,6 +24,7 @@ namespace TMS
         {
             InitializeComponent();
 
+            Console.WriteLine("v.0");
         }
     }
 }
