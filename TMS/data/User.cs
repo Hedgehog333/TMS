@@ -4,13 +4,13 @@ namespace TMS.data
 {
     public class User
     {
-        int id { set; get; }
-        string fName { set; get; }
-        string lName { set; get; }
-        string sName { set; get; }
-        dao.ERoles role { set; get; }
-        DateTime registrationDate { set; get; }
-        DateTime lastOnlineDate { set; get; }
+        public int id { set; get; }
+        public string fName { set; get; }
+        public string lName { set; get; }
+        public string sName { set; get; }
+        public dao.ERoles role { set; get; }
+        public DateTime registrationDate { set; get; }
+        public DateTime lastOnlineDate { set; get; }
         
     }
 }
