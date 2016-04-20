@@ -8,7 +8,7 @@ namespace TMS.data
 {
     class Answer
     {
-        bool isTrue { set; get; }
-        string body { set; get; }
+        public bool isTrue { set; get; }
+        public string body { set; get; }
     }
 }
