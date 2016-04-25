@@ -23,7 +23,8 @@ namespace TMS.dao
                             (
                                Int32.Parse(A.Attribute("id").Value),
                                Boolean.Parse(A.Element("isTrue").Value),
-                               A.Element("body").Value
+                               A.Element("body").Value,
+                               Int32.Parse(A.Attribute("questionId").Value)
                             )).SingleOrDefault<data.Answer>();
             return answer;
         }
@@ -36,9 +37,10 @@ namespace TMS.dao
             var answers = (from A in doc.Root.Elements("answer")
                           select new data.Answer
                               (
-                                 Int32.Parse(A.Attribute("id").Value),
-                                 Boolean.Parse(A.Element("isTrue").Value),
-                                 A.Element("body").Value
+                                Int32.Parse(A.Attribute("id").Value),
+                                Boolean.Parse(A.Element("isTrue").Value),
+                                A.Element("body").Value,
+                                Int32.Parse(A.Attribute("questionId").Value)
                               )).ToList<data.Answer>();
             return answers;
         }
@@ -58,7 +60,8 @@ namespace TMS.dao
             XElement answer = new XElement("answer",
                 new XAttribute("id", ++maxId),
                 new XElement("isTrue", item.isTrue),
-                new XElement("body", item.body));
+                new XElement("body", item.body),
+                new XAttribute("questionId", item.questionId));
             doc.Root.Add(answer);
             doc.Save(ConfigurationManager.AppSettings["AnswersFile"]);
         }
@@ -68,11 +71,12 @@ namespace TMS.dao
             IsFileExists();
 
             XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["AnswersFile"]);
-            var user = (from A in doc.Root.Elements("answer")
+            var answer = (from A in doc.Root.Elements("answer")
                         where Int32.Parse(A.Attribute("id").Value) == item.id
                         select A).FirstOrDefault();
-            user.SetElementValue("isTrue", item.isTrue);
-            user.SetElementValue("body", item.body);
+            answer.SetElementValue("isTrue", item.isTrue);
+            answer.SetElementValue("body", item.body);
+            answer.SetAttributeValue("questionId", item.questionId);
             doc.Save(ConfigurationManager.AppSettings["AnswersFile"]);
         }
 
@@ -81,10 +85,10 @@ namespace TMS.dao
             IsFileExists();
 
             XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["AnswersFile"]);
-            var user = doc.Root.Descendants("answer").Where(
+            var answer = doc.Root.Descendants("answer").Where(
                    t => Int32.Parse(t.Attribute("id").Value) == item.id
                 ).ToList();
-            user.Remove();
+            answer.Remove();
             doc.Save(ConfigurationManager.AppSettings["AnswersFile"]);
         }
         static void IsFileExists()
