@@ -8,7 +8,7 @@ namespace TMS.data
         public string fName { set; get; }
         public string lName { set; get; }
         public string sName { set; get; }
-        public dao.ERoles role { set; get; }
+        public ERoles role { set; get; }
         public DateTime registrationDate { set; get; }
         public DateTime lastOnlineDate { set; get; }
         
@@ -18,7 +18,7 @@ namespace TMS.data
                 string fName,
                 string lName,
                 string sName,
-                dao.ERoles role,
+                ERoles role,
                 DateTime registrationDate,
                 DateTime lastOnlineDate
             )
