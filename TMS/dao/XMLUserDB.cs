@@ -14,7 +14,9 @@ namespace TMS.dao
     {
         public data.User get(int id)
         {
-            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UserFile"]);
+            IsFileExists();
+
+            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UsersFile"]);
             var user = (from U in doc.Root.Elements("user")
                              where Int32.Parse(U.Attribute("id").Value) == id
                              select new data.User
@@ -32,7 +34,9 @@ namespace TMS.dao
 
         public List<data.User> getAll()
         {
-            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UserFile"]);
+            IsFileExists();
+
+            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UsersFile"]);
             List<data.User> users = (from U in doc.Root.Elements("user")
                         select new data.User
                             (
@@ -51,7 +55,7 @@ namespace TMS.dao
         {
             IsFileExists();
 
-            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UserFile"]);
+            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UsersFile"]);
             int maxId;
             try
             {
@@ -68,12 +72,14 @@ namespace TMS.dao
                 new XElement("registrationDate", item.registrationDate),
                 new XElement("lastOnlineDate", item.lastOnlineDate));
             doc.Root.Add(user);
-            doc.Save(ConfigurationManager.AppSettings["UserFile"]);
+            doc.Save(ConfigurationManager.AppSettings["UsersFile"]);
         }
 
         public void update(data.User item)
         {
-            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UserFile"]);
+            IsFileExists();
+
+            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UsersFile"]);
             var user = (from U in doc.Root.Elements("user")
                         where Int32.Parse(U.Attribute("id").Value) == item.id
                         select U).FirstOrDefault();
@@ -83,22 +89,24 @@ namespace TMS.dao
             user.SetElementValue("role", (int)item.role);
             user.SetElementValue("registrationDate", item.registrationDate);
             user.SetElementValue("lastOnlineDate", item.lastOnlineDate);
-            doc.Save(ConfigurationManager.AppSettings["UserFile"]);
+            doc.Save(ConfigurationManager.AppSettings["UsersFile"]);
         }
 
         public void delete(data.User item)
         {
-             XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UserFile"]);
+            IsFileExists();
+
+             XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UsersFile"]);
              var user = doc.Root.Descendants("user").Where(
                     t=> Int32.Parse(t.Attribute("id").Value) == item.id
                  ).ToList();
              user.Remove();
-             doc.Save(ConfigurationManager.AppSettings["UserFile"]);
+             doc.Save(ConfigurationManager.AppSettings["UsersFile"]);
         }
 
         static void IsFileExists()
         {
-            if (!File.Exists(ConfigurationManager.AppSettings["UserFile"]))
+            if (!File.Exists(ConfigurationManager.AppSettings["UsersFile"]))
             {
                 XNamespace empNM = "urn:lst-emp:emp";
 
@@ -111,7 +119,7 @@ namespace TMS.dao
                 XmlWriter xWrite = XmlWriter.Create(sw);
                 xDoc.Save(xWrite);
                 xWrite.Close();
-                xDoc.Save(ConfigurationManager.AppSettings["UserFile"]);
+                xDoc.Save(ConfigurationManager.AppSettings["UsersFile"]);
             }
         }
     }
