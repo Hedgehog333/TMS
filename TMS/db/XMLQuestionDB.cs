@@ -22,9 +22,10 @@ namespace TMS.db
                           select new data.Question
                               (
                                  Int32.Parse(Q.Attribute("id").Value),
-                                 Boolean.Parse(Q.Element("isFowAnswers").Value),
                                  Q.Element("body").Value,
-                                 Int32.Parse(Q.Attribute("teskId").Value)
+                                 Int32.Parse(Q.Attribute("testId").Value),
+                                 Boolean.Parse(Q.Element("isFowAnswers").Value),
+                                 Boolean.Parse(Q.Element("isDraft").Value)
                               )).SingleOrDefault<data.Question>();
             return question;
         }
@@ -38,9 +39,10 @@ namespace TMS.db
                             select new data.Question
                                 (
                                    Int32.Parse(Q.Attribute("id").Value),
-                                   Boolean.Parse(Q.Element("isFowAnswers").Value),
                                    Q.Element("body").Value,
-                                   Int32.Parse(Q.Attribute("teskId").Value)
+                                   Int32.Parse(Q.Attribute("testId").Value),
+                                   Boolean.Parse(Q.Element("isFowAnswers").Value),
+                                   Boolean.Parse(Q.Element("isDraft").Value)
                                 )).ToList<data.Question>();
             return questions;
         }
@@ -59,9 +61,10 @@ namespace TMS.db
 
             XElement question = new XElement("question",
                 new XAttribute("id", ++maxId),
-                new XElement("isFowAnswers", item.isFowAnswers),
                 new XElement("body", item.body),
-                new XAttribute("teskId", item.teskId));
+                new XAttribute("testId", item.testId),
+                new XElement("isFowAnswers", item.isFowAnswers),
+                new XElement("isDraft", item.isDraft));
             doc.Root.Add(question);
             doc.Save(ConfigurationManager.AppSettings["QuestionsFile"]);
         }
@@ -74,9 +77,10 @@ namespace TMS.db
             var question = (from Q in doc.Root.Elements("question")
                           where Int32.Parse(Q.Attribute("id").Value) == item.id
                           select Q).FirstOrDefault();
-            question.SetElementValue("isFowAnswers", item.isFowAnswers);
             question.SetElementValue("body", item.body);
-            question.SetAttributeValue("teskId", item.teskId);
+            question.SetAttributeValue("testId", item.testId);
+            question.SetElementValue("isFowAnswers", item.isFowAnswers);
+            question.SetElementValue("isDraft", item.isDraft);
             doc.Save(ConfigurationManager.AppSettings["QuestionsFile"]);
         }
 

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace TMS.dao
+namespace TMS.db
 {
-    class XMLAnswerDB : IDAO<data.Answer>
+    class XMLAnswerDB : dao.IDAO<data.Answer>
     {
         public data.Answer get(int id)
         {
@@ -22,9 +22,10 @@ namespace TMS.dao
                         select new data.Answer
                             (
                                Int32.Parse(A.Attribute("id").Value),
-                               Boolean.Parse(A.Element("isTrue").Value),
                                A.Element("body").Value,
-                               Int32.Parse(A.Attribute("questionId").Value)
+                               Boolean.Parse(A.Element("isCorrect").Value),
+                               Int32.Parse(A.Attribute("questionId").Value),
+                               Boolean.Parse(A.Element("isDraft").Value)
                             )).SingleOrDefault<data.Answer>();
             return answer;
         }
@@ -38,9 +39,10 @@ namespace TMS.dao
                           select new data.Answer
                               (
                                 Int32.Parse(A.Attribute("id").Value),
-                                Boolean.Parse(A.Element("isTrue").Value),
                                 A.Element("body").Value,
-                                Int32.Parse(A.Attribute("questionId").Value)
+                                Boolean.Parse(A.Element("isCorrect").Value),
+                                Int32.Parse(A.Attribute("questionId").Value),
+                                Boolean.Parse(A.Element("isDraft").Value)
                               )).ToList<data.Answer>();
             return answers;
         }
@@ -59,9 +61,10 @@ namespace TMS.dao
 
             XElement answer = new XElement("answer",
                 new XAttribute("id", ++maxId),
-                new XElement("isTrue", item.isTrue),
                 new XElement("body", item.body),
-                new XAttribute("questionId", item.questionId));
+                new XElement("isCorrect", item.isCorrect),
+                new XAttribute("questionId", item.questionId),
+                new XElement("isDraft", item.isDraft));
             doc.Root.Add(answer);
             doc.Save(ConfigurationManager.AppSettings["AnswersFile"]);
         }
@@ -74,9 +77,10 @@ namespace TMS.dao
             var answer = (from A in doc.Root.Elements("answer")
                         where Int32.Parse(A.Attribute("id").Value) == item.id
                         select A).FirstOrDefault();
-            answer.SetElementValue("isTrue", item.isTrue);
             answer.SetElementValue("body", item.body);
+            answer.SetElementValue("isCorrect", item.isCorrect);
             answer.SetAttributeValue("questionId", item.questionId);
+            answer.SetElementValue("isDraft", item.isDraft);
             doc.Save(ConfigurationManager.AppSettings["AnswersFile"]);
         }
 
@@ -91,6 +95,7 @@ namespace TMS.dao
             answer.Remove();
             doc.Save(ConfigurationManager.AppSettings["AnswersFile"]);
         }
+
         static void IsFileExists()
         {
             if (!File.Exists(ConfigurationManager.AppSettings["AnswersFile"]))

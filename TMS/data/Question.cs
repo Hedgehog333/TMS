@@ -9,22 +9,25 @@ namespace TMS.data
     class Question
     {
         public int id { set; get; }
-        public bool isFowAnswers { set; get; }
         public string body { set; get; }
-        public int teskId { set; get; }
+        public int testId { set; get; }
+        public bool isFowAnswers { set; get; }
+        public bool isDraft { set; get; }
         public List<data.Answer> answers;
         public Question
             (
                 int id,
-                bool isFowAnswers,
                 string body,
-                int teskId
+                int testId,
+                bool isFowAnswers,
+                bool isDraft
             )
         {
             this.id = id;
-            this.isFowAnswers = isFowAnswers;
             this.body = body;
-            this.teskId = teskId;
+            this.testId = testId;
+            this.isFowAnswers = isFowAnswers;
+            this.isDraft = isDraft;
             this.answers = new List<Answer>();
         }
     }
