@@ -8,9 +8,9 @@ using System.Configuration;
 using System.IO;
 using System.Xml;
 
-namespace TMS.dao
+namespace TMS.db
 {
-    public class XMLUserDB : IDAO<data.User>
+    public class XMLUserDB : dao.IDAO<data.User>
     {
         public data.User get(int id)
         {
@@ -25,7 +25,9 @@ namespace TMS.dao
                                     U.Element("fName").Value,
                                     U.Element("lName").Value,
                                     U.Element("sName").Value,
-                                    (ERoles)Int32.Parse(U.Element("role").Value),
+                                    U.Element("email").Value,
+                                    U.Element("password").Value,
+                                    (data.ERoles)Int32.Parse(U.Element("role").Value),
                                     DateTime.Parse(U.Element("registrationDate").Value),
                                     DateTime.Parse(U.Element("lastOnlineDate").Value)
                                  )).SingleOrDefault<data.User>();
@@ -40,13 +42,15 @@ namespace TMS.dao
             List<data.User> users = (from U in doc.Root.Elements("user")
                         select new data.User
                             (
-                               Int32.Parse(U.Attribute("id").Value),
-                               U.Element("fName").Value,
-                               U.Element("lName").Value,
-                               U.Element("sName").Value,
-                               (ERoles)Int32.Parse(U.Element("role").Value),
-                               DateTime.Parse(U.Element("registrationDate").Value),
-                               DateTime.Parse(U.Element("lastOnlineDate").Value)
+                                Int32.Parse(U.Attribute("id").Value),
+                                U.Element("fName").Value,
+                                U.Element("lName").Value,
+                                U.Element("sName").Value,
+                                U.Element("email").Value,
+                                U.Element("password").Value,
+                                (data.ERoles)Int32.Parse(U.Element("role").Value),
+                                DateTime.Parse(U.Element("registrationDate").Value),
+                                DateTime.Parse(U.Element("lastOnlineDate").Value)
                             )).ToList<data.User>();
             return users;
         }
@@ -68,6 +72,8 @@ namespace TMS.dao
                 new XElement("fName", item.fName),
                 new XElement("lName", item.lName),
                 new XElement("sName", item.sName),
+                new XElement("email", item.sName),
+                new XElement("password", item.sName),
                 new XElement("role", (int)item.role),
                 new XElement("registrationDate", item.registrationDate),
                 new XElement("lastOnlineDate", item.lastOnlineDate));
@@ -86,6 +92,8 @@ namespace TMS.dao
             user.SetElementValue("fName", item.fName);
             user.SetElementValue("lName", item.lName);
             user.SetElementValue("sName", item.sName);
+            user.SetElementValue("email", item.email);
+            user.SetElementValue("password", item.password);
             user.SetElementValue("role", (int)item.role);
             user.SetElementValue("registrationDate", item.registrationDate);
             user.SetElementValue("lastOnlineDate", item.lastOnlineDate);
