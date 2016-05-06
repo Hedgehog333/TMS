@@ -13,6 +13,7 @@ namespace TMS.data
         public string desctiption { set; get; }
         public int categoriesId { set; get; }
         public DateTime creationDate { set; get; }
+        public DateTime lastModefied { set; get; }
         public int authorId { set; get; }
         public bool isDraft { set; get; }
         public List<data.Question> question = new List<Question>();
@@ -23,6 +24,7 @@ namespace TMS.data
                 string desctiption,
                 int categoriesId,
                 DateTime creationDate,
+                DateTime lastModefied,
                 int authorId,
                 bool isDraft
             )
@@ -32,6 +34,7 @@ namespace TMS.data
             this.desctiption = desctiption;
             this.categoriesId = categoriesId;
             this.creationDate = creationDate;
+            this.lastModefied = lastModefied;
             this.authorId = authorId;
             this.isDraft = isDraft;
             this.question = new List<Question>();

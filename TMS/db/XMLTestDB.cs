@@ -26,6 +26,7 @@ namespace TMS.db
                                  T.Element("desctiption").Value,
                                  Int32.Parse(T.Attribute("categoriesId").Value),
                                  DateTime.Parse(T.Element("creationDate").Value),
+                                 DateTime.Parse(T.Element("lastModefied").Value),
                                  Int32.Parse(T.Attribute("authorId").Value),
                                  Boolean.Parse(T.Element("isDraft").Value)
                               )).SingleOrDefault<data.Test>();
@@ -45,6 +46,7 @@ namespace TMS.db
                                  T.Element("desctiption").Value,
                                  Int32.Parse(T.Attribute("categoriesId").Value),
                                  DateTime.Parse(T.Element("creationDate").Value),
+                                 DateTime.Parse(T.Element("lastModefied").Value),
                                  Int32.Parse(T.Attribute("authorId").Value),
                                  Boolean.Parse(T.Element("isDraft").Value)
                             )).ToList<data.Test>();
@@ -66,11 +68,12 @@ namespace TMS.db
             XElement tests = new XElement("test",
                 new XAttribute("id", ++maxId),
                 new XElement("title", item.title),
-                new XElement("desctiption", item.title),
-                new XAttribute("categoriesId", item.title),
-                new XElement("creationDate", item.title),
-                new XAttribute("authorId", item.title),
-                new XElement("isDraft", item.title));
+                new XElement("desctiption", item.desctiption),
+                new XAttribute("categoriesId", item.categoriesId),
+                new XElement("creationDate", item.creationDate),
+                new XElement("lastModefied", item.lastModefied),
+                new XAttribute("authorId", item.authorId),
+                new XElement("isDraft", item.isDraft));
             doc.Root.Add(tests);
             doc.Save(ConfigurationManager.AppSettings["TestsFile"]);
         }
@@ -87,6 +90,7 @@ namespace TMS.db
             test.SetElementValue("desctiption", item.desctiption);
             test.SetAttributeValue("categoriesId", item.categoriesId);
             test.SetElementValue("creationDate", item.creationDate);
+            test.SetElementValue("lastModefied", item.lastModefied);
             test.SetAttributeValue("authorId", item.authorId);
             test.SetElementValue("isDraft", item.isDraft);
             doc.Save(ConfigurationManager.AppSettings["TestsFile"]);
