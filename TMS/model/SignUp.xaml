@@ -4,17 +4,17 @@
         Title="SignUp" Height="413" Width="444" ResizeMode="NoResize" Closed="Window_Closed">
     <StackPanel Margin="20 0" >
         <Label Content="First Name*" />
-        <TextBox Height="27" TextWrapping="Wrap" Name="FName"/>
+        <TextBox Height="27" TextWrapping="Wrap" Name="txtbFName"/>
         <Label Content="Last Name*"/>
-        <TextBox Height="27" TextWrapping="Wrap" Name="LName"/>
+        <TextBox Height="27" TextWrapping="Wrap" Name="txtbLName"/>
         <Label Content="Second Name"/>
-        <TextBox Height="27" TextWrapping="Wrap" Name="SName"/>
+        <TextBox Height="27" TextWrapping="Wrap" Name="txtbSName"/>
         <Label Content="Email*"/>
-        <TextBox Height="27" TextWrapping="Wrap" Name="Email"/>
+        <TextBox Height="27" TextWrapping="Wrap" Name="txtbEmail"/>
         <Label Content="Password*"/>
-        <PasswordBox Height="27" Name="Password"/>
+        <PasswordBox Height="27" Name="pasPassword"/>
         <Label Content="Repeat password*"/>
-        <PasswordBox Height="27" Name="RepeatPassword" />
+        <PasswordBox Height="27" Name="pasRepeatPassword" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>

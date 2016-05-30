@@ -31,44 +31,44 @@ namespace TMS.model
         {
             bool fN = false, lN = fN, em = fN, pas = fN, rpas = fN;
 
-            if (String.IsNullOrWhiteSpace(this.FName.Text))
-                this.FName.BorderBrush = Brushes.Red;
+            if (String.IsNullOrWhiteSpace(this.txtbFName.Text))
+                this.txtbFName.BorderBrush = Brushes.Red;
             else
             {
-                this.FName.BorderBrush = Brushes.Green;
+                this.txtbFName.BorderBrush = Brushes.Green;
                 fN = true;
             }
 
-            if (String.IsNullOrWhiteSpace(this.LName.Text))
-                this.LName.BorderBrush = Brushes.Red;
+            if (String.IsNullOrWhiteSpace(this.txtbLName.Text))
+                this.txtbLName.BorderBrush = Brushes.Red;
             else
             {
-                this.LName.BorderBrush = Brushes.Green;
+                this.txtbLName.BorderBrush = Brushes.Green;
                 lN = true;
             }
 
-            if (String.IsNullOrWhiteSpace(this.Email.Text))
-                this.Email.BorderBrush = Brushes.Red;
+            if (String.IsNullOrWhiteSpace(this.txtbEmail.Text))
+                this.txtbEmail.BorderBrush = Brushes.Red;
             else
             {
-                this.Email.BorderBrush = Brushes.Green;
+                this.txtbEmail.BorderBrush = Brushes.Green;
                 em = true;
             }
 
-            if (String.IsNullOrWhiteSpace(this.Password.Password))
-                this.Password.BorderBrush = Brushes.Red;
+            if (String.IsNullOrWhiteSpace(this.pasPassword.Password))
+                this.pasPassword.BorderBrush = Brushes.Red;
             else
             {
-                this.Password.BorderBrush = Brushes.Green;
+                this.pasPassword.BorderBrush = Brushes.Green;
                 pas = true;
             }
 
 
-            if (String.IsNullOrWhiteSpace(this.RepeatPassword.Password) || !this.Password.Password.Equals(this.RepeatPassword.Password))
-                this.RepeatPassword.BorderBrush = Brushes.Red;
+            if (String.IsNullOrWhiteSpace(this.pasRepeatPassword.Password) || !this.pasPassword.Password.Equals(this.pasRepeatPassword.Password))
+                this.pasRepeatPassword.BorderBrush = Brushes.Red;
             else
             {
-                this.RepeatPassword.BorderBrush = Brushes.Green;
+                this.pasRepeatPassword.BorderBrush = Brushes.Green;
                 rpas = true;
             }
 
@@ -76,12 +76,12 @@ namespace TMS.model
             {
                 UserDatabaseManagerSingleton.Instance.add(
                     new User(
-                        -1, 
-                        this.FName.Text, 
-                        this.LName.Text, 
-                        this.SName.Text, 
-                        this.Email.Text, 
-                        this.Password.Password, 
+                        -1,
+                        this.txtbFName.Text,
+                        this.txtbLName.Text,
+                        this.txtbSName.Text, 
+                        this.txtbEmail.Text,
+                        this.pasPassword.Password, 
                         ERoles.student, 
                         DateTime.Now
                     )
