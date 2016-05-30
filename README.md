@@ -21,7 +21,7 @@ create table [Users](
 	[fName] varchar(36) not null,
 	[lName] varchar(36) not null,
 	[sName] varchar(36),
-	[email] varchar(64) not null,
+	[email] varchar(64) unique not null,
 	[password] varchar(64) not null,
 	[roleId] int not null
 	foreign key references [Roles]([id])
