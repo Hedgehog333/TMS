@@ -141,8 +141,8 @@ namespace TMS.db
                 new XElement("fName", item.fName),
                 new XElement("lName", item.lName),
                 new XElement("sName", item.sName),
-                new XElement("email", item.sName),
-                new XElement("password", item.sName),
+                new XElement("email", item.email),
+                new XElement("password", item.password),
                 new XElement("role", (int)item.role),
                 new XElement("registrationDate", item.registrationDate),
                 new XElement("lastOnlineDate", item.lastOnlineDate));
