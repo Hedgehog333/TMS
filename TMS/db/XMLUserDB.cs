@@ -12,12 +12,18 @@ namespace TMS.db
 {
     public class XMLUserDB : dao.IDAO<data.User>
     {
+        /// <summary>
+        /// return null if User not found
+        /// </summary>
         public data.User get(int id)
         {
             IsFileExists();
 
             XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UsersFile"]);
-            var user = (from U in doc.Root.Elements("user")
+            data.User user = null;
+            try
+            {
+                user = (from U in doc.Root.Elements("user")
                              where Int32.Parse(U.Attribute("id").Value) == id
                              select new data.User
                                  (
@@ -31,15 +37,55 @@ namespace TMS.db
                                     DateTime.Parse(U.Element("registrationDate").Value),
                                     DateTime.Parse(U.Element("lastOnlineDate").Value)
                                  )).SingleOrDefault<data.User>();
+            }
+            catch (Exception ex)
+            { }
             return user;
         }
+        /// <summary>
+        /// return null if User not found
+        /// </summary>
+        public data.User get(string email)
+        {
+            IsFileExists();
+
+            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UsersFile"]);
+            data.User user = null;
+            try
+            {
+                user = (from U in doc.Root.Elements("user")
+                            where U.Element("email").Value.Equals(email)
+                            select new data.User
+                                (
+                                   Int32.Parse(U.Attribute("id").Value),
+                                   U.Element("fName").Value,
+                                   U.Element("lName").Value,
+                                   U.Element("sName").Value,
+                                   U.Element("email").Value,
+                                   U.Element("password").Value,
+                                   (data.ERoles)Int32.Parse(U.Element("role").Value),
+                                   DateTime.Parse(U.Element("registrationDate").Value),
+                                   DateTime.Parse(U.Element("lastOnlineDate").Value)
+                                )).SingleOrDefault<data.User>();
+            }
+            catch(Exception ex)
+            {}
+            return user;
+            
+        }
+        /// <summary>
+        /// return null if User not found
+        /// </summary>
         public data.User get(string rowName, string value)
         {
             IsFileExists();
 
             XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UsersFile"]);
-            var user = (from U in doc.Root.Elements("user")
-                        where U.Attribute(rowName).Value == value
+            data.User user = null;
+            try
+            {
+                user = (from U in doc.Root.Elements("user")
+                        where U.Element(rowName).Value.Equals(value)
                         select new data.User
                             (
                                Int32.Parse(U.Attribute("id").Value),
@@ -52,6 +98,9 @@ namespace TMS.db
                                DateTime.Parse(U.Element("registrationDate").Value),
                                DateTime.Parse(U.Element("lastOnlineDate").Value)
                             )).SingleOrDefault<data.User>();
+            }
+            catch (Exception ex)
+            { }
             return user;
         }
         public List<data.User> getAll()
