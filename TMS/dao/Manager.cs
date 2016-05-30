@@ -9,12 +9,10 @@ namespace TMS.dao
     public  class Manager<T> 
         where T : class, new()
     {
-        private static Manager<T> _instance = null;
+        private static T _instance = null;
         private static readonly object _lock = new object();
-        public T Dao = new T();
-        protected Manager()
-        {}
-        public static Manager<T> Instance
+
+        public static  T Instance
         {
             get
             {
@@ -22,7 +20,7 @@ namespace TMS.dao
                 {
                     if (_instance == null)
                     {
-                        _instance = new Manager<T>();
+                        _instance = new T();
                     }
                 }
                 return _instance;
