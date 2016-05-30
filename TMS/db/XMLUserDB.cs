@@ -33,7 +33,27 @@ namespace TMS.db
                                  )).SingleOrDefault<data.User>();
             return user;
         }
+        public data.User get(string rowName, string value)
+        {
+            IsFileExists();
 
+            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["UsersFile"]);
+            var user = (from U in doc.Root.Elements("user")
+                        where U.Attribute(rowName).Value == value
+                        select new data.User
+                            (
+                               Int32.Parse(U.Attribute("id").Value),
+                               U.Element("fName").Value,
+                               U.Element("lName").Value,
+                               U.Element("sName").Value,
+                               U.Element("email").Value,
+                               U.Element("password").Value,
+                               (data.ERoles)Int32.Parse(U.Element("role").Value),
+                               DateTime.Parse(U.Element("registrationDate").Value),
+                               DateTime.Parse(U.Element("lastOnlineDate").Value)
+                            )).SingleOrDefault<data.User>();
+            return user;
+        }
         public List<data.User> getAll()
         {
             IsFileExists();
@@ -130,5 +150,6 @@ namespace TMS.db
                 xDoc.Save(ConfigurationManager.AppSettings["UsersFile"]);
             }
         }
+
     }
 }
