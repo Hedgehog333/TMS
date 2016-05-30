@@ -37,7 +37,27 @@ namespace TMS.data
             this.registrationDate = registrationDate;
             this.lastOnlineDate = lastOnlineDate;
         }
-
+        public User
+            (
+                int id,
+                string fName,
+                string lName,
+                string sName,
+                string email,
+                string password,
+                ERoles role,
+                DateTime registrationDate
+            )
+        {
+            this.id = id;
+            this.fName = fName;
+            this.lName = lName;
+            this.sName = sName;
+            this.email = email;
+            this.password = password;
+            this.role = role;
+            this.registrationDate = registrationDate;
+        }
         public override string ToString()
         {
             return "id: " + this.id +
