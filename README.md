@@ -14,6 +14,14 @@ create table [Roles]
 	[name] varchar(24) not null
 );
 ```
+Table Role:
+```sql
+create table [Groups]
+(
+	[id] int primary key identity(1,1) not null,
+	[name] varchar(24) not null
+);
+```
 Table User:
 ```sql
 create table [Users](
@@ -23,6 +31,10 @@ create table [Users](
 	[sName] varchar(36),
 	[email] varchar(64) unique not null,
 	[password] varchar(64) not null,
+	[groupId] int not null
+	foreign key references [Groups]([id])
+	on update cascade
+	on delete cascade,
 	[roleId] int not null
 	foreign key references [Roles]([id])
 	on update cascade
