@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TMS.logic
 {
+    /// <summary>
+    /// There is determined a database to work.
+    /// </summary>
     public class UserDatabaseManagerSingleton
     {
         private UserDatabaseManagerSingleton()
