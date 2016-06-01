@@ -86,7 +86,7 @@ namespace TMS.db
 
             XElement group = new XElement("group",
                 new XAttribute("id", ++maxId),
-                new XElement("fName", item.Name));
+                new XElement("Name", item.Name));
             doc.Root.Add(group);
             doc.Save(ConfigurationManager.AppSettings["GroupsFile"]);
         }
