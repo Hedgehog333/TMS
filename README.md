@@ -98,3 +98,18 @@ create table [Answers](
 	[isDraft] bit not null default 1,
 );
 ```
+Table Results:
+```sql
+create table [Results](
+	[id] int primary key identity(1,1) not null,
+	[testId] int not null
+	foreign key references [Tests]([id])
+	on update cascade
+	on delete cascade,
+	[userId] int not null
+	foreign key references [Users]([id]),
+	[correctQuestion] int not null,
+	[totalQuestion] int not null,
+	[compliteTest] datetime default getdate(),
+);
+```

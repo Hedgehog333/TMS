@@ -32,6 +32,26 @@ namespace TMS.db
                               )).SingleOrDefault<data.Test>();
             return task;
         }
+        public data.Test get(string param, string value)
+        {
+            IsFileExists();
+
+            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["TestsFile"]);
+            var task = (from T in doc.Root.Elements("test")
+                        where T.Attribute(param).Value.Equals(value)
+                        select new data.Test
+                            (
+                               Int32.Parse(T.Attribute("id").Value),
+                               T.Element("title").Value,
+                               T.Element("desctiption").Value,
+                               Int32.Parse(T.Attribute("categoriesId").Value),
+                               DateTime.Parse(T.Element("creationDate").Value),
+                               DateTime.Parse(T.Element("lastModefied").Value),
+                               Int32.Parse(T.Attribute("authorId").Value),
+                               Boolean.Parse(T.Element("isDraft").Value)
+                            )).SingleOrDefault<data.Test>();
+            return task;
+        }
 
         public List<data.Test> getAll()
         {
