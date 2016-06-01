@@ -1,7 +1,7 @@
 ﻿<Window x:Class="TMS.model.SignUp"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SignUp" Height="413" Width="444" ResizeMode="NoResize" Closed="Window_Closed">
+        Title="SignUp" Height="462.232" Width="444" ResizeMode="NoResize" Closed="Window_Closed">
     <StackPanel Margin="20 0" >
         <Label Content="First Name*" />
         <TextBox Height="27" TextWrapping="Wrap" Name="txtbFName"/>
@@ -11,6 +11,8 @@
         <TextBox Height="27" TextWrapping="Wrap" Name="txtbSName"/>
         <Label Content="Email*"/>
         <TextBox Height="27" TextWrapping="Wrap" Name="txtbEmail"/>
+        <Label Content="Group*"/>
+        <ComboBox ItemsSource="{Binding Path=getAll}" SelectedValue="{Binding Path=getAll}" Name="cboxGroup" />
         <Label Content="Password*"/>
         <PasswordBox Height="27" Name="pasPassword"/>
         <Label Content="Repeat password*"/>

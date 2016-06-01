@@ -25,11 +25,16 @@ namespace TMS.model
         public SignUp()
         {
             InitializeComponent();
+
+            List<data.Group> dataList = Manager<db.XMLGroupDB>.Instance.getAll();
+            this.cboxGroup.ItemsSource = dataList;
+            this.cboxGroup.DisplayMemberPath = "Name";
+            this.cboxGroup.SelectedValuePath = "id";
         }
 
         private void btnSignUpClick(object sender, RoutedEventArgs e)
         {
-            bool fN = false, lN = fN, em = fN, pas = fN, rpas = fN;
+            bool fN = false, lN = fN, em = fN, pas = fN, rpas = fN, gbN = fN;
 
             if (String.IsNullOrWhiteSpace(this.txtbFName.Text))
                 this.txtbFName.BorderBrush = Brushes.Red;
@@ -63,6 +68,13 @@ namespace TMS.model
                 pas = true;
             }
 
+            if (this.cboxGroup.SelectedValue == null)
+                this.cboxGroup.BorderBrush = Brushes.Red;
+            else
+            {
+                this.cboxGroup.BorderBrush = Brushes.Green;
+                gbN = true;
+            }
 
             if (String.IsNullOrWhiteSpace(this.pasRepeatPassword.Password) || !this.pasPassword.Password.Equals(this.pasRepeatPassword.Password))
                 this.pasRepeatPassword.BorderBrush = Brushes.Red;
@@ -72,7 +84,7 @@ namespace TMS.model
                 rpas = true;
             }
 
-            if (fN && lN && em && pas && rpas)
+            if (fN && lN && em && pas && rpas && gbN)
             {
                 UserDatabaseManagerSingleton.Instance.add(
                     new User(
@@ -82,6 +94,7 @@ namespace TMS.model
                         this.txtbSName.Text, 
                         this.txtbEmail.Text,
                         this.pasPassword.Password, 
+                        (int)this.cboxGroup.SelectedValue,
                         ERoles.student, 
                         DateTime.Now
                     )
