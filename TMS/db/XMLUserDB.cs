@@ -33,6 +33,7 @@ namespace TMS.db
                                     U.Element("sName").Value,
                                     U.Element("email").Value,
                                     U.Element("password").Value,
+                                    Int32.Parse(U.Element("groupId").Value),
                                     (data.ERoles)Int32.Parse(U.Element("role").Value),
                                     DateTime.Parse(U.Element("registrationDate").Value),
                                     DateTime.Parse(U.Element("lastOnlineDate").Value)
@@ -63,6 +64,7 @@ namespace TMS.db
                                    U.Element("sName").Value,
                                    U.Element("email").Value,
                                    U.Element("password").Value,
+                                   Int32.Parse(U.Element("groupId").Value),
                                    (data.ERoles)Int32.Parse(U.Element("role").Value),
                                    DateTime.Parse(U.Element("registrationDate").Value),
                                    DateTime.Parse(U.Element("lastOnlineDate").Value)
@@ -88,15 +90,16 @@ namespace TMS.db
                         where U.Element(rowName).Value.Equals(value)
                         select new data.User
                             (
-                               Int32.Parse(U.Attribute("id").Value),
-                               U.Element("fName").Value,
-                               U.Element("lName").Value,
-                               U.Element("sName").Value,
-                               U.Element("email").Value,
-                               U.Element("password").Value,
-                               (data.ERoles)Int32.Parse(U.Element("role").Value),
-                               DateTime.Parse(U.Element("registrationDate").Value),
-                               DateTime.Parse(U.Element("lastOnlineDate").Value)
+                                Int32.Parse(U.Attribute("id").Value),
+                                U.Element("fName").Value,
+                                U.Element("lName").Value,
+                                U.Element("sName").Value,
+                                U.Element("email").Value,
+                                U.Element("password").Value,
+                                Int32.Parse(U.Element("groupId").Value),
+                                (data.ERoles)Int32.Parse(U.Element("role").Value),
+                                DateTime.Parse(U.Element("registrationDate").Value),
+                                DateTime.Parse(U.Element("lastOnlineDate").Value)
                             )).SingleOrDefault<data.User>();
             }
             catch (Exception ex)
@@ -117,6 +120,7 @@ namespace TMS.db
                                 U.Element("sName").Value,
                                 U.Element("email").Value,
                                 U.Element("password").Value,
+                                Int32.Parse(U.Element("groupId").Value),
                                 (data.ERoles)Int32.Parse(U.Element("role").Value),
                                 DateTime.Parse(U.Element("registrationDate").Value),
                                 DateTime.Parse(U.Element("lastOnlineDate").Value)
@@ -143,6 +147,7 @@ namespace TMS.db
                 new XElement("sName", item.sName),
                 new XElement("email", item.email),
                 new XElement("password", item.password),
+                new XElement("groupId", item.groupId),
                 new XElement("role", (int)item.role),
                 new XElement("registrationDate", item.registrationDate),
                 new XElement("lastOnlineDate", item.lastOnlineDate));
@@ -163,6 +168,7 @@ namespace TMS.db
             user.SetElementValue("sName", item.sName);
             user.SetElementValue("email", item.email);
             user.SetElementValue("password", item.password);
+            user.SetElementValue("groupId", item.groupId);
             user.SetElementValue("role", (int)item.role);
             user.SetElementValue("registrationDate", item.registrationDate);
             user.SetElementValue("lastOnlineDate", item.lastOnlineDate);

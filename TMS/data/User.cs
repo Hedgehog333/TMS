@@ -10,6 +10,7 @@ namespace TMS.data
         public string sName { set; get; }
         public string email { set; get; }
         public string password { set; get; }
+        public int groupId { set; get; }
         public ERoles role { set; get; }
         public DateTime registrationDate { set; get; }
         public DateTime lastOnlineDate { set; get; }
@@ -22,6 +23,7 @@ namespace TMS.data
                 string sName,
                 string email,
                 string password,
+                int groupId,
                 ERoles role,
                 DateTime registrationDate,
                 DateTime lastOnlineDate
@@ -33,6 +35,7 @@ namespace TMS.data
             this.sName = sName;
             this.email = email;
             this.password = password;
+            this.groupId = groupId;
             this.role = role;
             this.registrationDate = registrationDate;
             this.lastOnlineDate = lastOnlineDate;
@@ -45,6 +48,7 @@ namespace TMS.data
                 string sName,
                 string email,
                 string password,
+                int groupId,
                 ERoles role,
                 DateTime registrationDate
             )
@@ -55,6 +59,7 @@ namespace TMS.data
             this.sName = sName;
             this.email = email;
             this.password = password;
+            this.groupId = groupId;
             this.role = role;
             this.registrationDate = registrationDate;
         }
@@ -66,6 +71,7 @@ namespace TMS.data
                 "\nsecond name: " + this.sName +
                 "\nemail: " + this.email +
                 "\npassword: " + this.password +
+                "\ngroupId: " + this.groupId +
                 "\nrole: " + this.role.ToString() +
                 "\nregistration date: " + this.registrationDate +
                 "\nlast online date: " + this.lastOnlineDate;
