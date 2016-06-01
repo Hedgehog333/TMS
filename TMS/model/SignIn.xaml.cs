@@ -25,19 +25,6 @@ namespace TMS.model
         public SignIn()
         {
             InitializeComponent();
-
-            //db.XMLUserDB x = new db.XMLUserDB();
-            //data.User user = new data.User(2, "fname Z", "lname", "sname", data.ERoles.student, DateTime.Now, DateTime.Now.AddDays(3));
-            //x.add(user);
-            //x.update(user);
-            //x.delete(user);
-            //data.User y = x.get(2);
-            //Console.WriteLine(y.lName);
-            /*foreach (var item in x.getAll())
-            {
-                Console.WriteLine(item.ToString() + "\n");
-            }*/
-            //Console.WriteLine(dao.Manager<db.XMLUserDB>.Instance.Dao.get(1).ToString());
         }
 
         private void btnSignUpClick(object sender, RoutedEventArgs e)
