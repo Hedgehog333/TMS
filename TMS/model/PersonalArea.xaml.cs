@@ -162,7 +162,8 @@ namespace TMS.model
         private void btnAddQuestion_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-
+            CreateQuestion CQ = new CreateQuestion(id);
+            CQ.ShowDialog();
         }
         private void btnDeleteQuestion_Click(object sender, RoutedEventArgs e)
         {
@@ -173,7 +174,7 @@ namespace TMS.model
         private void btnStartTest_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-
+            
         }
 
         private void btnRefreshTestsClick(object sender, RoutedEventArgs e)
