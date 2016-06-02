@@ -1,0 +1,40 @@
+﻿<Window x:Class="TMS.model.PersonalArea"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PersonalArea" Height="646.768" Width="954.753">
+
+
+    <Grid ShowGridLines="True">
+        <!-- Устанавливаем две строки -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- Устанавливаем три столбца -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel HorizontalAlignment="Right" Height="32" Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label Content="Wellcome, " Name="Wellcome" VerticalAlignment="Center" HorizontalContentAlignment="Right"  Margin="10,3" Width="400"/>
+            <Button Content="Sign out" Cursor="Hand" Width="74"  Margin="0,0,10,0" Click="btnSignOutClick"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" Margin="0,0,0,0">
+            <StackPanel>
+                <Button Name="btnCreateGroup" Content="Create group" Width="129" Height="32" Margin="5" Click="btnCreateGroupClick"/>
+                <Button Name="btnCrateCategoriesTest" Content="Create category test" Width="129" Height="32" Margin="5" Click="btnCrateCategoriesTestClick"/>
+                <Button Name="btnCrateTest" Content="Create test" Width="129" Height="32" Margin="5" Click="btnCrateTestClick"/>
+
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
+            <StackPanel Name="spListTests">
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+
+
+</Window>

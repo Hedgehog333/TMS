@@ -12,12 +12,18 @@ namespace TMS.db
 {
     class XMLQuestionDB : dao.IDAO<data.Question>
     {
+        /// <summary>
+        /// return null if User not found
+        /// </summary>
         public data.Question get(int id)
         {
             IsFileExists();
 
             XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["QuestionsFile"]);
-            var question = (from Q in doc.Root.Elements("question")
+            data.Question question = null;
+            try
+            {
+                question = (from Q in doc.Root.Elements("question")
                           where Int32.Parse(Q.Attribute("id").Value) == id
                           select new data.Question
                               (
@@ -27,9 +33,30 @@ namespace TMS.db
                                  Boolean.Parse(Q.Element("isFowAnswers").Value),
                                  Boolean.Parse(Q.Element("isDraft").Value)
                               )).SingleOrDefault<data.Question>();
+            }
+            catch (Exception ex)
+            { }
             return question;
         }
 
+        public List<data.Question> getForTestId(int id)
+        {
+            IsFileExists();
+
+            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["GroupsFile"]);
+            List<data.Question>question = (from Q in doc.Root.Elements("question")
+                            where Int32.Parse(Q.Element("testId").Value) == id
+                            select new data.Question
+                                (
+                                   Int32.Parse(Q.Attribute("id").Value),
+                                   Q.Element("body").Value,
+                                   Int32.Parse(Q.Attribute("testId").Value),
+                                   Boolean.Parse(Q.Element("isFowAnswers").Value),
+                                   Boolean.Parse(Q.Element("isDraft").Value)
+                                )).ToList<data.Question>();
+ 
+            return question;
+        }
         public List<data.Question> getAll()
         {
             IsFileExists();

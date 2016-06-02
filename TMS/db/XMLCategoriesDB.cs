@@ -12,21 +12,52 @@ namespace TMS.db
 {
     class XMLCategoriesDB : dao.IDAO<data.Categories>
     {
-
+        /// <summary>
+        /// return null if User not found
+        /// </summary>
         public data.Categories get(int id)
         {
             IsFileExists();
 
             XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["CategoriesFile"]);
-            var category = (from C in doc.Root.Elements("category")
+            data.Categories category = null;
+            try
+            {
+                category = (from C in doc.Root.Elements("category")
+                            where Int32.Parse(C.Attribute("id").Value) == id
                               select new data.Categories
                                   (
                                     Int32.Parse(C.Attribute("id").Value),
                                     C.Element("title").Value
                                   )).SingleOrDefault<data.Categories>();
+            }
+            catch (Exception ex)
+            { }
             return category;
         }
+        /// <summary>
+        /// return null if User not found
+        /// </summary>
+        public data.Categories get(string name)
+        {
+            IsFileExists();
 
+            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["CategoriesFile"]);
+            data.Categories category = null;
+            try
+            {
+                category = (from R in doc.Root.Elements("category")
+                            where R.Element("title").Value.Equals(name)
+                            select new data.Categories
+                             (
+                                Int32.Parse(R.Attribute("id").Value),
+                                R.Element("title").Value
+                             )).SingleOrDefault<data.Categories>();
+            }
+            catch (Exception ex)
+            { }
+            return category;
+        }
         public List<data.Categories> getAll()
         {
             IsFileExists();
