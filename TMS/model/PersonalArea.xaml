@@ -25,6 +25,7 @@
                 <Button Name="btnCreateGroup" Content="Create group" Width="129" Height="32" Margin="5" Click="btnCreateGroupClick"/>
                 <Button Name="btnCrateCategoriesTest" Content="Create category test" Width="129" Height="32" Margin="5" Click="btnCrateCategoriesTestClick"/>
                 <Button Name="btnCrateTest" Content="Create test" Width="129" Height="32" Margin="5" Click="btnCrateTestClick"/>
+                <Button Name="btnRefreshTests" Content="Refresh tests" Width="129" Height="32" Margin="5" Click="btnRefreshTestsClick"/>
 
             </StackPanel>
         </ScrollViewer>

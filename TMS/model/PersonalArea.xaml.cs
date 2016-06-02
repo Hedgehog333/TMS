@@ -31,6 +31,11 @@ namespace TMS.model
                 this.btnCreateGroup.Visibility = System.Windows.Visibility.Hidden;
                 this.btnCrateCategoriesTest.Visibility = System.Windows.Visibility.Hidden;
                 this.btnCrateTest.Visibility = System.Windows.Visibility.Hidden;
+
+                DependencyObject parent = VisualTreeHelper.GetParent(this.btnCreateGroup);
+                (parent as StackPanel).Children.Remove(this.btnCreateGroup);
+                (parent as StackPanel).Children.Remove(this.btnCrateCategoriesTest);
+                (parent as StackPanel).Children.Remove(this.btnCrateTest);
             }
             this.RefreshTests();
         }
@@ -67,16 +72,6 @@ namespace TMS.model
             this.spListTests.Children.Clear();
             foreach (data.Test item in tests)
             {
-                /*                
-                <Grid Uid="1" Height="77" >
-                    <Label Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="426"/>
-                    <Button Content="Edit" HorizontalAlignment="Left" Margin="468,22,0,0" VerticalAlignment="Top" Width="48" Height="27"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="612,22,0,0" VerticalAlignment="Top" Width="48" Height="27"/>
-                    <Button Content="Add Question" HorizontalAlignment="Left" Margin="521,22,0,0" VerticalAlignment="Top" Width="86" Height="27"/>
-                    <Label Content="Total questions: " HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="170"/>
-                    <Label Content="Category: " HorizontalAlignment="Left" Margin="185,41,0,0" VerticalAlignment="Top" Width="170"/>
-                </Grid>
-                 */
                 Grid grid = new Grid();
                 grid.Uid = item.id.ToString();
                 grid.Height = 78;
@@ -179,6 +174,11 @@ namespace TMS.model
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
 
+        }
+
+        private void btnRefreshTestsClick(object sender, RoutedEventArgs e)
+        {
+            this.RefreshTests();
         }
     }
 }
