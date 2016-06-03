@@ -1,0 +1,31 @@
+﻿<Window x:Class="TMS.model.PassingTheTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        Title="PassingTheTest" MinHeight="300" Height="462" MinWidth="608" Width="685">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="63"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="176,10,183,-4" Width="240" Grid.Row="1">
+            <Button Name="btnFirstQuestion" Click="btnFirstQuestion_Click" Content="first" HorizontalAlignment="Left" Margin="11,5,0,0" VerticalAlignment="Top" Width="31" Height="31"/>
+            <Button Name="btnPreviousQuestion" Click="btnPreviousQuestion_Click" Content="prev" HorizontalAlignment="Left" Margin="47,5,0,0" VerticalAlignment="Top" Width="31" Height="31"/>
+            <Button Name="btnNaxtQuestion" Click="btnNaxtQuestion_Click" Content="next" HorizontalAlignment="Left" Margin="161,5,0,0" VerticalAlignment="Top" Width="31" Height="31"/>
+            <Button Name="btnLasrQuestion" Click="btnLasrQuestion_Click" Content="end" HorizontalAlignment="Left" Margin="197,5,0,0" VerticalAlignment="Top" Width="31" Height="31"/>
+            <Label Name="lblCurrentQuestion" Content="1" HorizontalAlignment="Left" Margin="83,10,0,0" VerticalAlignment="Top" Width="29"/>
+            <Label Name="lblTotalQuestion" Content="100" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="29"/>
+            <Label Content="/" HorizontalAlignment="Left" Margin="112,10,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <ScrollViewer Height="116" Margin="10,10,0,0" VerticalAlignment="Top" >
+            <TextBlock TextWrapping="Wrap" Name="txtbQuestionBody" />
+        </ScrollViewer>
+        <ScrollViewer Margin="10,131,0,10">
+            <StackPanel Name="spQuestionList">
+
+            </StackPanel>
+        </ScrollViewer>
+        <Button Content="Finish test" Margin="0,15,10,0" Grid.Row="1" VerticalAlignment="Top" Height="32" HorizontalAlignment="Right" Width="75" Click="FinishTest_Click"/>
+
+    </Grid>
+</Window>
