@@ -9,7 +9,7 @@
         <TextBox Height="27" TextWrapping="Wrap" Name="txtbLName"/>
         <Label Content="Second Name"/>
         <TextBox Height="27" TextWrapping="Wrap" Name="txtbSName"/>
-        <Label Content="Email*"/>
+        <Label Content="Login*"/>
         <TextBox Height="27" TextWrapping="Wrap" Name="txtbEmail"/>
         <Label Content="Group*"/>
         <ComboBox ItemsSource="{Binding Path=getAll}" SelectedValue="{Binding Path=getAll}" Name="cboxGroup" />

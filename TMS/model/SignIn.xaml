@@ -14,7 +14,7 @@
                 <Button Content="Sign Up" Cursor="Hand" Width="74" Click="btnSignUpClick" Margin="0,0,10,0"/>
             </StackPanel>
             <StackPanel Height="162" Margin="0 20 0 0">
-                <Label Margin="10 0" Content="Email"/>
+                <Label Margin="10 0" Content="Login"/>
                 <TextBox Margin="10 0" Height="27" TextWrapping="Wrap" Name="txtbEmail">
                     <TextBox.BorderBrush>
                         <RadialGradientBrush>
