@@ -71,12 +71,13 @@ namespace TMS.model
 
             List<data.Test> tests = TestDatabaseManagerSingleton.Instance.getAll();
             this.spListTests.Children.Clear();
-            foreach (data.Test item in tests)
+            foreach (data.Test item in CurrentUserSingleton.Instance.User.role == data.ERoles.student? tests.FindAll(x => x.isDraft == false): tests)
             {
                 Grid grid = new Grid()
                 {
                     Uid = item.id.ToString(),
-                    Height = 78
+                    Height = 78,
+                    Background = item.isDraft ? Brushes.LightGray : Brushes.White
                 };
 
                 Label title = new Label()
@@ -103,7 +104,7 @@ namespace TMS.model
                     };
                     edit.Click += this.btnEditTest_Click;
 
-                    Button add = new Button()
+                    Button show = new Button()
                     {
                         Content = "Questions",
                         HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
@@ -112,7 +113,7 @@ namespace TMS.model
                         Width = 86,
                         Margin = new Thickness(521, 22, 0, 0)
                     };
-                    add.Click += btnShowQuestions_Click;
+                    show.Click += btnShowQuestions_Click;
 
                     Button delete = new Button()
                     {
@@ -126,7 +127,7 @@ namespace TMS.model
                     delete.Click += this.btnDeleteTest_Click;
 
                     grid.Children.Add(edit);
-                    grid.Children.Add(add);
+                    grid.Children.Add(show);
                     grid.Children.Add(delete);
                 }
                 else
@@ -197,7 +198,8 @@ namespace TMS.model
         private void btnStartTest_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-            
+            PassingTheTest PTT = new PassingTheTest(id);
+            PTT.ShowDialog();
         }
 
         private void btnRefreshTestsClick(object sender, RoutedEventArgs e)
@@ -207,7 +209,7 @@ namespace TMS.model
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            this.Owner.Close();
+            //this.Owner.Close();
         }
 
         private void btnDeleteGroupClick(object sender, RoutedEventArgs e)
@@ -220,6 +222,23 @@ namespace TMS.model
         {
             DeleteCategoryOrGroup delCategory = new DeleteCategoryOrGroup(CategoryDatabaseManagerSingleton.Instance.getAll());
             delCategory.ShowDialog();
+        }
+
+        private void btnShowResultsClick(object sender, RoutedEventArgs e)
+        {
+            switch(CurrentUserSingleton.Instance.User.role)
+            {
+		        case data.ERoles.student:
+                   
+
+
+                    break;
+                default:
+
+
+
+                    break;
+	        }
         }
 
     }
