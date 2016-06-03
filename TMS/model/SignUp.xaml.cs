@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TMS.logic;
-using TMS.data;
-using TMS.dao;
 
 namespace TMS.model
 {
@@ -26,7 +24,7 @@ namespace TMS.model
         {
             InitializeComponent();
 
-            List<data.Group> dataList = Manager<db.XMLGroupDB>.Instance.getAll();
+            List<data.Group> dataList = GroupDatabaseManagerSingleton.Instance.getAll();
             this.cboxGroup.ItemsSource = dataList;
             this.cboxGroup.DisplayMemberPath = "Name";
             this.cboxGroup.SelectedValuePath = "id";
@@ -87,7 +85,7 @@ namespace TMS.model
             if (fN && lN && em && pas && rpas && gbN)
             {
                 UserDatabaseManagerSingleton.Instance.add(
-                    new User(
+                    new data.User(
                         -1,
                         this.txtbFName.Text,
                         this.txtbLName.Text,
@@ -95,7 +93,7 @@ namespace TMS.model
                         this.txtbEmail.Text,
                         this.pasPassword.Password, 
                         (int)this.cboxGroup.SelectedValue,
-                        ERoles.student, 
+                        data.ERoles.student, 
                         DateTime.Now
                     )
                 );

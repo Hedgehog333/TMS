@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TMS.logic;
 
 namespace TMS.model
 {
@@ -26,9 +27,9 @@ namespace TMS.model
         private void btnCreateGroup_Click(object sender, RoutedEventArgs e)
         {
             if(!String.IsNullOrWhiteSpace(this.txtbGroupName.Text))
-                if(dao.Manager<db.XMLGroupDB>.Instance.get(this.txtbGroupName.Text) == null )
+                if(GroupDatabaseManagerSingleton.Instance.get(this.txtbGroupName.Text) == null )
                 {
-                    dao.Manager<db.XMLGroupDB>.Instance.add(new data.Group(-1, this.txtbGroupName.Text));
+                    GroupDatabaseManagerSingleton.Instance.add(new data.Group(-1, this.txtbGroupName.Text));
                     MessageBox.Show("Save complite.");
                     this.txtbGroupName.Clear();
                 }

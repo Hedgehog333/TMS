@@ -24,7 +24,7 @@ namespace TMS.model
         {
             InitializeComponent();
 
-            List<data.Categories> dataList = dao.Manager<db.XMLCategoriesDB>.Instance.getAll();
+            List<data.Categories> dataList = CategoryDatabaseManagerSingleton.Instance.getAll();
             this.cmbbCategories.ItemsSource = dataList;
             this.cmbbCategories.DisplayMemberPath = "title";
             this.cmbbCategories.SelectedValuePath = "id";
@@ -45,7 +45,7 @@ namespace TMS.model
         {
             InitializeComponent();
 
-            List<data.Categories> dataList = dao.Manager<db.XMLCategoriesDB>.Instance.getAll();
+            List<data.Categories> dataList = CategoryDatabaseManagerSingleton.Instance.getAll();
             this.cmbbCategories.ItemsSource = dataList;
             this.cmbbCategories.DisplayMemberPath = "title";
             this.cmbbCategories.SelectedValuePath = "id";
@@ -68,7 +68,7 @@ namespace TMS.model
                 this.cmbbCategories.BorderBrush = Brushes.Green;
                 if (isEdit)
                 {
-                    dao.Manager<db.XMLTestDB>.Instance.update(new data.Test
+                    TestDatabaseManagerSingleton.Instance.update(new data.Test
                         (
                             this.TestId,
                             this.txtbTitle.Text,
@@ -85,7 +85,7 @@ namespace TMS.model
                 }
                 else
                 {
-                    dao.Manager<db.XMLTestDB>.Instance.add(
+                    TestDatabaseManagerSingleton.Instance.add(
                         new data.Test(
                             -1,
                             this.txtbTitle.Text,

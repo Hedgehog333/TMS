@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TMS.logic;
-using TMS.data;
+
 namespace TMS.model
 {
     /// <summary>
@@ -59,7 +59,7 @@ namespace TMS.model
             {
                 if (this.isEdit)
                 {
-                    dao.Manager<db.XMLAnswerDB>.Instance.update(new data.Answer(
+                    AnswerDatabaseManagerSingleton.Instance.update(new data.Answer(
                                 this.AnswerId,
                                 this.txtbBody.Text,
                                 this.checkbIsCorrect.IsChecked.Value,
@@ -73,7 +73,7 @@ namespace TMS.model
                 }
                 else
                 {
-                    dao.Manager<db.XMLAnswerDB>.Instance.add(new data.Answer(
+                    AnswerDatabaseManagerSingleton.Instance.add(new data.Answer(
                             -1,
                             this.txtbBody.Text,
                             this.checkbIsCorrect.IsChecked.Value,

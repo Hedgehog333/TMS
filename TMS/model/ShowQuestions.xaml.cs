@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TMS.logic;
 
 namespace TMS.model
 {
@@ -31,7 +32,7 @@ namespace TMS.model
 
         private void RefreshQuestions()
         {
-            List<data.Question> questions = dao.Manager<db.XMLQuestionDB>.Instance.getAll();
+            List<data.Question> questions = QuestionDatabaseManagerSingleton.Instance.getAll();
             this.spListQuestions.Children.Clear();
             foreach (data.Question item in questions)
             {
@@ -119,7 +120,7 @@ namespace TMS.model
             try 
             {
                 qid = Convert.ToInt32(this.selectedQuestion.Uid.ToString());
-                questions = dao.Manager<db.XMLAnswerDB>.Instance.getAll().FindAll(x => x.questionId.Equals(qid));
+                questions = AnswerDatabaseManagerSingleton.Instance.getAll().FindAll(x => x.questionId.Equals(qid));
             }
             catch(Exception ex)
             {
@@ -192,16 +193,16 @@ namespace TMS.model
         private void btnDeleteQuestion_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-            dao.Manager<db.XMLQuestionDB>.Instance.delete(dao.Manager<db.XMLQuestionDB>.Instance.get(id));
+            QuestionDatabaseManagerSingleton.Instance.delete(QuestionDatabaseManagerSingleton.Instance.get(id));
             if (((sender as Button).Parent as Grid).Equals(this.selectedQuestion))
             {
                 this.selectedQuestion = null;
             }
 
 
-            foreach (data.Answer item in dao.Manager<db.XMLAnswerDB>.Instance.getAll().FindAll(x => x.questionId == id))
+            foreach (data.Answer item in AnswerDatabaseManagerSingleton.Instance.getAll().FindAll(x => x.questionId == id))
             {
-                dao.Manager<db.XMLAnswerDB>.Instance.delete(item);
+                AnswerDatabaseManagerSingleton.Instance.delete(item);
             }
 
 
@@ -212,7 +213,7 @@ namespace TMS.model
         private void btnEditAnswer_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-            data.Answer answer = dao.Manager<db.XMLAnswerDB>.Instance.get(id);
+            data.Answer answer = AnswerDatabaseManagerSingleton.Instance.get(id);
             CreateAnswer CA = new CreateAnswer(answer.id, answer.body, answer.isCorrect, answer.questionId, answer.isDraft);
             CA.ShowDialog();
             this.RefreshAnswers();
@@ -221,7 +222,7 @@ namespace TMS.model
         private void btnDeleteAnswer_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-            dao.Manager<db.XMLAnswerDB>.Instance.delete(dao.Manager<db.XMLAnswerDB>.Instance.get(id));
+            AnswerDatabaseManagerSingleton.Instance.delete(AnswerDatabaseManagerSingleton.Instance.get(id));
 
             this.RefreshAnswers();
         }
@@ -236,7 +237,7 @@ namespace TMS.model
         private void btnEditQuestion_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-            data.Question question = dao.Manager<db.XMLQuestionDB>.Instance.get(id);
+            data.Question question = QuestionDatabaseManagerSingleton.Instance.get(id);
             CreateQuestion CQ = new CreateQuestion(question.id,question.body,question.testId,question.isFowAnswers,question.isDraft);
             CQ.ShowDialog();
             this.RefreshQuestions();

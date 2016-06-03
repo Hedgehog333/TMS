@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TMS.logic;
 
 namespace TMS.model
 {
@@ -32,9 +33,9 @@ namespace TMS.model
         private void btnCreateCategory_Click(object sender, RoutedEventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(this.txtbCategoryName.Text))
-                if (dao.Manager<db.XMLCategoriesDB>.Instance.get(this.txtbCategoryName.Text) == null)
+                if (CategoryDatabaseManagerSingleton.Instance.get(this.txtbCategoryName.Text) == null)
                 {
-                    dao.Manager<db.XMLCategoriesDB>.Instance.add(new data.Categories(-1, this.txtbCategoryName.Text));
+                    CategoryDatabaseManagerSingleton.Instance.add(new data.Categories(-1, this.txtbCategoryName.Text));
                     MessageBox.Show("Save complite.");
                     this.txtbCategoryName.Clear();
                 }

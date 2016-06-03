@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TMS.logic;
 
 namespace TMS.model
 {
@@ -54,7 +55,7 @@ namespace TMS.model
             {
                 if (this.isEdit)
                 {
-                    dao.Manager<db.XMLQuestionDB>.Instance.update(new data.Question
+                   QuestionDatabaseManagerSingleton.Instance.update(new data.Question
                         (
                             this.QuestionId,
                             this.txtbBody.Text,
@@ -68,7 +69,7 @@ namespace TMS.model
                 }
                 else
                 {
-                    dao.Manager<db.XMLQuestionDB>.Instance.add(new data.Question
+                    QuestionDatabaseManagerSingleton.Instance.add(new data.Question
                         (
                             -1,
                             this.txtbBody.Text,

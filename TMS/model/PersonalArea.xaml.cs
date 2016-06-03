@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 using TMS.logic;
 
 namespace TMS.model
@@ -68,7 +67,7 @@ namespace TMS.model
         public void RefreshTests()
         {
 
-            List<data.Test> tests = dao.Manager<db.XMLTestDB>.Instance.getAll();
+            List<data.Test> tests = TestDatabaseManagerSingleton.Instance.getAll();
             this.spListTests.Children.Clear();
             foreach (data.Test item in tests)
             {
@@ -144,7 +143,7 @@ namespace TMS.model
                     grid.Children.Add(start);
                 }
 
-                List<data.Question> qustions = dao.Manager<db.XMLQuestionDB>.Instance.getAll();
+                List<data.Question> qustions = QuestionDatabaseManagerSingleton.Instance.getAll();
                 Label countQuestion = new Label() 
                 {
                     Content = "Total questions: " + qustions.Count(x => x.testId == item.id).ToString(),
@@ -154,7 +153,7 @@ namespace TMS.model
                     Margin = new Thickness(10, 41, 0, 0)
                 };
                 
-                data.Categories category = dao.Manager<db.XMLCategoriesDB>.Instance.get(item.categoriesId);
+                data.Categories category = CategoryDatabaseManagerSingleton.Instance.get(item.categoriesId);
                 Label categoryName = new Label()
                 {
                     Content = "Category: " + category.title,
@@ -174,7 +173,7 @@ namespace TMS.model
         private void btnEditTest_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-            data.Test test = dao.Manager<db.XMLTestDB>.Instance.get(id);
+            data.Test test = TestDatabaseManagerSingleton.Instance.get(id);
             CreateTest CT = new CreateTest(test.id,test.title, test.desctiption, test.categoriesId, test.authorId,test.creationDate, test.isDraft);
             CT.ShowDialog();
             this.RefreshTests();
@@ -190,7 +189,7 @@ namespace TMS.model
         private void btnDeleteTest_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-            dao.Manager<db.XMLTestDB>.Instance.delete(dao.Manager<db.XMLTestDB>.Instance.get(id));
+            TestDatabaseManagerSingleton.Instance.delete(TestDatabaseManagerSingleton.Instance.get(id));
             this.RefreshTests();
         }
         private void btnStartTest_Click(object sender, RoutedEventArgs e)
