@@ -1,7 +1,7 @@
 ﻿<Window x:Class="TMS.model.CreateCategoryTest"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="CreateCategoryTest" Height="119.333" Width="342">
+        Title="CreateCategoryTest" Height="119.333" Width="342" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

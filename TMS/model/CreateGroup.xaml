@@ -1,7 +1,7 @@
 ﻿<Window x:Class="TMS.model.CreateGroup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="CreateGroup" Height="119.333" Width="300">
+        Title="CreateGroup" Height="119.333" Width="300" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
