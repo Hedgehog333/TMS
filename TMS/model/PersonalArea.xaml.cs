@@ -203,5 +203,10 @@ namespace TMS.model
             this.RefreshTests();
         }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Owner.Close();
+        }
+
     }
 }
