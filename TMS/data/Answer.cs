@@ -24,7 +24,7 @@ namespace TMS.data
         {
             this.id = id;
             this.body = body;
-            this.isCorrect = isCorrect;
+            this.isCorrect = isTrue;
             this.questionId = questionId;
             this.isDraft = isDraft;
         }
