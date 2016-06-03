@@ -81,6 +81,7 @@ namespace TMS.model
                         ));
                     MessageBox.Show("Save complite.");
                     this.Close();
+                    return;
                 }
                 else
                 {
