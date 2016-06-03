@@ -32,7 +32,7 @@ namespace TMS.model
 
         private void RefreshQuestions()
         {
-            List<data.Question> questions = QuestionDatabaseManagerSingleton.Instance.getAll();
+            List<data.Question> questions = QuestionDatabaseManagerSingleton.Instance.getAll().FindAll(x => x.testId == TestId);
             this.spListQuestions.Children.Clear();
             foreach (data.Question item in questions)
             {
@@ -40,7 +40,7 @@ namespace TMS.model
                 {
                     Uid = item.id.ToString(),
                     MinHeight = 80,
-                    Background = Brushes.White
+                    Background = item.isDraft? Brushes.LightGray : Brushes.White
                 };
                 ColumnDefinition gridCol1 = new ColumnDefinition()
                 {
@@ -133,7 +133,8 @@ namespace TMS.model
                 {
                     Uid = item.id.ToString(),
                     MinHeight = 80,
-                    Background = Brushes.White
+                    Background = item.isDraft?Brushes.LightGray:Brushes.White,
+                    
                 };
                 ColumnDefinition gridCol1 = new ColumnDefinition()
                 {
@@ -152,7 +153,8 @@ namespace TMS.model
                     Text = item.body,
                     Margin = new Thickness(10, 10, 10, 0),
                     TextWrapping = TextWrapping.WrapWithOverflow,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Top
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    FontWeight = item.isCorrect ? FontWeights.Bold : FontWeights.Normal 
                 };
                 grid.Children.Add(bodyAnswer);
 
@@ -257,7 +259,7 @@ namespace TMS.model
         {
             if (this.selectedQuestion != null)
             {
-                this.selectedQuestion.Background = Brushes.White;
+                this.selectedQuestion.Background = QuestionDatabaseManagerSingleton.Instance.get(Int32.Parse(this.selectedQuestion.Uid)).isDraft? Brushes.LightGray : Brushes.White;
                 (this.selectedQuestion.Children[1] as Button).IsEnabled = false;
                 (this.selectedQuestion.Children[2] as Button).IsEnabled = false;
                 (this.selectedQuestion.Children[3] as Button).IsEnabled = false;
