@@ -1,6 +1,7 @@
 ﻿<Window x:Class="TMS.model.CreateTest"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
         Title="CreateTest" Height="239.667" Width="471" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>

@@ -35,6 +35,8 @@ namespace TMS.model
                 (parent as StackPanel).Children.Remove(this.btnCreateGroup);
                 (parent as StackPanel).Children.Remove(this.btnCrateCategoriesTest);
                 (parent as StackPanel).Children.Remove(this.btnCrateTest);
+                (parent as StackPanel).Children.Remove(this.btnDeleteCategory);
+                (parent as StackPanel).Children.Remove(this.btnDeleteGroup);
             }
             this.RefreshTests();
         }
@@ -206,6 +208,18 @@ namespace TMS.model
         private void Window_Closed(object sender, EventArgs e)
         {
             this.Owner.Close();
+        }
+
+        private void btnDeleteGroupClick(object sender, RoutedEventArgs e)
+        {
+            DeleteCategoryOrGroup delGroup = new DeleteCategoryOrGroup(GroupDatabaseManagerSingleton.Instance.getAll());
+            delGroup.ShowDialog();
+        }
+
+        private void btnDeleteCategoryClick(object sender, RoutedEventArgs e)
+        {
+            DeleteCategoryOrGroup delCategory = new DeleteCategoryOrGroup(CategoryDatabaseManagerSingleton.Instance.getAll());
+            delCategory.ShowDialog();
         }
 
     }

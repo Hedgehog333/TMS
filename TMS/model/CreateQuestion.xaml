@@ -1,6 +1,7 @@
 ﻿<Window x:Class="TMS.model.CreateQuestion"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
         Title="CreateQuestion"  Height="246" Width="471" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>

@@ -1,6 +1,7 @@
 ﻿<Window x:Class="TMS.model.SignUp"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
         Title="SignUp" Height="462.232" Width="444" ResizeMode="NoResize" Closed="Window_Closed">
     <StackPanel Margin="20 0" >
         <Label Content="First Name*" />
