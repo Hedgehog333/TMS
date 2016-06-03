@@ -100,18 +100,18 @@ namespace TMS.model
                         Width = 48,
                         Margin = new Thickness(468, 22, 0, 0)
                     };
-                    edit.Click += this.btnEditQuestion_Click;
+                    edit.Click += this.btnEditTest_Click;
 
                     Button add = new Button()
                     {
-                        Content = "Add Question",
+                        Content = "Questions",
                         HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
                         VerticalAlignment = System.Windows.VerticalAlignment.Top,
                         Height = 27,
                         Width = 86,
                         Margin = new Thickness(521, 22, 0, 0)
                     };
-                    add.Click += btnAddQuestion_Click;
+                    add.Click += btnShowQuestions_Click;
 
                     Button delete = new Button()
                     {
@@ -122,7 +122,7 @@ namespace TMS.model
                         Width = 48,
                         Margin = new Thickness(612, 22, 0, 0)
                     };
-                    delete.Click += this.btnDeleteQuestion_Click;
+                    delete.Click += this.btnDeleteTest_Click;
 
                     grid.Children.Add(edit);
                     grid.Children.Add(add);
@@ -171,19 +171,23 @@ namespace TMS.model
             }
         }
 
-        private void btnEditQuestion_Click(object sender, RoutedEventArgs e)
+        private void btnEditTest_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
+            data.Test test = dao.Manager<db.XMLTestDB>.Instance.get(id);
+            CreateTest CT = new CreateTest(test.id,test.title, test.desctiption, test.categoriesId, test.authorId,test.creationDate, test.isDraft);
+            CT.ShowDialog();
+            this.RefreshTests();
 
         }
-        private void btnAddQuestion_Click(object sender, RoutedEventArgs e)
+        private void btnShowQuestions_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
             ShowQuestions SQ = new ShowQuestions(id);
             SQ.ShowDialog();
             this.RefreshTests();
         }
-        private void btnDeleteQuestion_Click(object sender, RoutedEventArgs e)
+        private void btnDeleteTest_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
             dao.Manager<db.XMLTestDB>.Instance.delete(dao.Manager<db.XMLTestDB>.Instance.get(id));
@@ -200,10 +204,5 @@ namespace TMS.model
             this.RefreshTests();
         }
 
-        private void btnShowQuestion_Click(object sender, RoutedEventArgs e)
-        {
-            int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-            
-        }
     }
 }
