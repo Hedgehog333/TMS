@@ -16,7 +16,7 @@ namespace TMS.data
         public DateTime lastModefied { set; get; }
         public int authorId { set; get; }
         public bool isDraft { set; get; }
-        public List<data.Question> question = new List<Question>();
+        //public List<data.Question> question = new List<Question>();
         public Test
             (
                 int id,
@@ -37,7 +37,7 @@ namespace TMS.data
             this.lastModefied = lastModefied;
             this.authorId = authorId;
             this.isDraft = isDraft;
-            this.question = new List<Question>();
+            //this.question = new List<Question>();
         }
     }
 }
