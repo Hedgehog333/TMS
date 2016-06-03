@@ -38,25 +38,6 @@ namespace TMS.db
             { }
             return question;
         }
-
-        public List<data.Question> getForTestId(int id)
-        {
-            IsFileExists();
-
-            XDocument doc = XDocument.Load(ConfigurationManager.AppSettings["GroupsFile"]);
-            List<data.Question>question = (from Q in doc.Root.Elements("question")
-                            where Int32.Parse(Q.Element("testId").Value) == id
-                            select new data.Question
-                                (
-                                   Int32.Parse(Q.Attribute("id").Value),
-                                   Q.Element("body").Value,
-                                   Int32.Parse(Q.Attribute("testId").Value),
-                                   Boolean.Parse(Q.Element("isFowAnswers").Value),
-                                   Boolean.Parse(Q.Element("isDraft").Value)
-                                )).ToList<data.Question>();
- 
-            return question;
-        }
         public List<data.Question> getAll()
         {
             IsFileExists();
