@@ -55,7 +55,10 @@ namespace TMS.model
             this.AuthorId = authorId;
             this.txtbTitle.Text = title;
             this.txtbDescription.Text = desctiption;
-            this.cmbbCategories.SelectedValue = categoriesId;
+            try
+            {
+                this.cmbbCategories.SelectedValue = categoriesId;
+            }catch(Exception ex){}
             this.checkbIsDraft.IsChecked = isDraft;
             this.CreationDate = crete;
         }

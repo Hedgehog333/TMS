@@ -41,8 +41,11 @@ namespace TMS.model
             this.cboxGroup.ItemsSource = GroupDatabaseManagerSingleton.Instance.getAll();
             this.cboxGroup.DisplayMemberPath = "Name";
             this.cboxGroup.SelectedValuePath = "id";
-
-            this.cboxGroup.SelectedValue = GroupDatabaseManagerSingleton.Instance.get(user.groupId).id;
+            try
+            {
+                this.cboxGroup.SelectedValue = GroupDatabaseManagerSingleton.Instance.get(user.groupId).id;
+            }
+            catch (Exception ex) { }
         }
 
         private void btnGoBackClick(object sender, RoutedEventArgs e)
