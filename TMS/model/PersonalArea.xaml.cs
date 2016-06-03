@@ -72,46 +72,56 @@ namespace TMS.model
             this.spListTests.Children.Clear();
             foreach (data.Test item in tests)
             {
-                Grid grid = new Grid();
-                grid.Uid = item.id.ToString();
-                grid.Height = 78;
+                Grid grid = new Grid()
+                {
+                    Uid = item.id.ToString(),
+                    Height = 78
+                };
 
-                Label title = new Label();
-                title.Content = item.title;
-                title.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                title.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                title.Width = 426;
-                title.Margin = new Thickness(10, 10, 0, 0);
+                Label title = new Label()
+                {
+                    Content = item.title,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    Width = 426,
+                    Margin = new Thickness(10, 10, 0, 0)
+                };
                 
                 grid.Children.Add(title);
 
                 if(!CurrentUserSingleton.Instance.User.role.Equals(data.ERoles.student))
                 {
-                    Button edit = new Button();
-                    edit.Content = "Edit";
-                    edit.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                    edit.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                    edit.Height = 27;
-                    edit.Width = 48;
-                    edit.Margin = new Thickness(468, 22, 0, 0);
+                    Button edit = new Button()
+                    {
+                        Content = "Edit",
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                        Height = 27,
+                        Width = 48,
+                        Margin = new Thickness(468, 22, 0, 0)
+                    };
                     edit.Click += this.btnEditQuestion_Click;
 
-                    Button add = new Button();
-                    add.Content = "Add Question";
-                    add.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                    add.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                    add.Height = 27;
-                    add.Width = 86;
-                    add.Margin = new Thickness(521, 22, 0, 0);
+                    Button add = new Button()
+                    {
+                        Content = "Add Question",
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                        Height = 27,
+                        Width = 86,
+                        Margin = new Thickness(521, 22, 0, 0)
+                    };
                     add.Click += btnAddQuestion_Click;
 
-                    Button delete = new Button();
-                    delete.Content = "Delete";
-                    delete.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                    delete.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                    delete.Height = 27;
-                    delete.Width = 48;
-                    delete.Margin = new Thickness(612, 22, 0, 0);
+                    Button delete = new Button()
+                    {
+                        Content = "Delete",
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                        Height = 27,
+                        Width = 48,
+                        Margin = new Thickness(612, 22, 0, 0)
+                    };
                     delete.Click += this.btnDeleteQuestion_Click;
 
                     grid.Children.Add(edit);
@@ -120,32 +130,39 @@ namespace TMS.model
                 }
                 else
                 {
-                    Button start = new Button();
-                    start.Content = "Start test";
-                    start.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                    start.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                    start.Height = 27;
-                    start.Width = 192;
-                    start.Margin = new Thickness(468, 22, 0, 0);
+                    Button start = new Button()
+                    {
+                        Content = "Start test",
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                        Height = 27,
+                        Width = 192,
+                        Margin = new Thickness(468, 22, 0, 0)
+                    };
                     start.Click += this.btnStartTest_Click;
 
                     grid.Children.Add(start);
                 }
 
-                Label countQuestion = new Label();
-                countQuestion.Content = "Total questions: " + dao.Manager<db.XMLQuestionDB>.Instance.getForTestId(item.id).Count.ToString();
-                countQuestion.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                countQuestion.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                countQuestion.Width = 426;
-                countQuestion.Margin = new Thickness(10, 41, 0, 0);
-
-                Label categoryName = new Label();
+                List<data.Question> qustions = dao.Manager<db.XMLQuestionDB>.Instance.getAll();
+                Label countQuestion = new Label() 
+                {
+                    Content = "Total questions: " + qustions.Count(x => x.testId == item.id).ToString(),
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    Width = 426,
+                    Margin = new Thickness(10, 41, 0, 0)
+                };
+                
                 data.Categories category = dao.Manager<db.XMLCategoriesDB>.Instance.get(item.categoriesId);
-                categoryName.Content = "Category: " + category.title;
-                categoryName.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                categoryName.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                categoryName.Width = 426;
-                categoryName.Margin = new Thickness(185, 41, 0, 0);
+                Label categoryName = new Label()
+                {
+                    Content = "Category: " + category.title,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    Width = 180,
+                    Margin = new Thickness(185, 41, 0, 0)
+                };
 
                 grid.Children.Add(countQuestion);
                 grid.Children.Add(categoryName);
@@ -162,8 +179,9 @@ namespace TMS.model
         private void btnAddQuestion_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
-            CreateQuestion CQ = new CreateQuestion(id);
-            CQ.ShowDialog();
+            ShowQuestions SQ = new ShowQuestions(id);
+            SQ.ShowDialog();
+            this.RefreshTests();
         }
         private void btnDeleteQuestion_Click(object sender, RoutedEventArgs e)
         {
@@ -180,6 +198,12 @@ namespace TMS.model
         private void btnRefreshTestsClick(object sender, RoutedEventArgs e)
         {
             this.RefreshTests();
+        }
+
+        private void btnShowQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            int id = Convert.ToInt32(((sender as Button).Parent as Grid).Uid);
+            
         }
     }
 }
