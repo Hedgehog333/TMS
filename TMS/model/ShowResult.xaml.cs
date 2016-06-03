@@ -36,13 +36,13 @@ namespace TMS.model
             
             foreach (data.Result item in results)
             {
-                if
+                /*if
                     (
                         CurrentUserSingleton.Instance.User.role != data.ERoles.student?
-                   //     TestDatabaseManagerSingleton.Instance.get("authorId", CurrentUserSingleton.Instance.User.id.ToString()).id == item.testId
+                        TestDatabaseManagerSingleton.Instance.get("authorId", CurrentUserSingleton.Instance.User.id.ToString()).id == item.testId
                         : true
                     )
-                {
+                {*/
                     data.User user = UserDatabaseManagerSingleton.Instance.get(item.userId);
                     binding.Add(new data.ResultViewBindingDataGrid()
                     {
@@ -54,7 +54,7 @@ namespace TMS.model
                         totalQuestion = item.totalQuestion,
                         compliteTest = item.compliteTest
                     });
-                }
+               // }
             }
             this.dgResults.ItemsSource = binding;
         }
