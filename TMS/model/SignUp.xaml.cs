@@ -84,22 +84,31 @@ namespace TMS.model
 
             if (fN && lN && em && pas && rpas && gbN)
             {
-                UserDatabaseManagerSingleton.Instance.add(
-                    new data.User(
-                        -1,
-                        this.txtbFName.Text,
-                        this.txtbLName.Text,
-                        this.txtbSName.Text, 
-                        this.txtbEmail.Text,
-                        this.pasPassword.Password, 
-                        (int)this.cboxGroup.SelectedValue,
-                        data.ERoles.student, 
-                        DateTime.Now
-                    )
-                );
-                MessageBox.Show("Save complite.");
-                this.Owner.Show();
-                this.Close();
+                if (UserDatabaseManagerSingleton.Instance.get(this.txtbEmail.Text) == null)
+                {
+                    this.txtbEmail.BorderBrush = Brushes.Green;
+                    UserDatabaseManagerSingleton.Instance.add(
+                        new data.User(
+                            -1,
+                            this.txtbFName.Text,
+                            this.txtbLName.Text,
+                            this.txtbSName.Text,
+                            this.txtbEmail.Text,
+                            this.pasPassword.Password,
+                            (int)this.cboxGroup.SelectedValue,
+                            data.ERoles.student,
+                            DateTime.Now
+                        )
+                    );
+                    MessageBox.Show("Save complite.");
+                    this.Owner.Show();
+                    this.Close();
+                }
+                else
+                {
+                    this.txtbEmail.BorderBrush = Brushes.Red;
+                    MessageBox.Show("login \"" + this.txtbEmail.Text + "\" already exist!");
+                }
             }
         }
 
