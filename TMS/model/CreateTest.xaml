@@ -22,6 +22,7 @@
         <Label Content="Description" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="26"/>
         <ComboBox Name="cmbbCategories" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="254" Height="22"/>
         <Label Content="Category*" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="0.544,0.551" Width="66" Height="26"/>
+        <CheckBox Name="checkbIsDraft" Content="Is draft" Grid.Column="2" HorizontalAlignment="Left" Margin="10,15,0,0" Grid.Row="2" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
