@@ -50,23 +50,23 @@ namespace TMS.model
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (this.isEdit)
+            if (!String.IsNullOrWhiteSpace(this.txtbBody.Text))
             {
-                dao.Manager<db.XMLQuestionDB>.Instance.update(new data.Question
-                    (
-                        this.QuestionId,
-                        this.txtbBody.Text,
-                        this.idTest,
-                        this.checkbIsFowAnswer.IsChecked.Value,
-                        this.checkbIsDraft.IsChecked.Value
-                    )
-                );
-                MessageBox.Show("Save complite.");
-                this.Close();
-            }
-            else
-            {
-                if (!String.IsNullOrWhiteSpace(this.txtbBody.Text))
+                if (this.isEdit)
+                {
+                    dao.Manager<db.XMLQuestionDB>.Instance.update(new data.Question
+                        (
+                            this.QuestionId,
+                            this.txtbBody.Text,
+                            this.idTest,
+                            this.checkbIsFowAnswer.IsChecked.Value,
+                            this.checkbIsDraft.IsChecked.Value
+                        )
+                    );
+                    MessageBox.Show("Save complite.");
+                    this.Close();
+                }
+                else
                 {
                     dao.Manager<db.XMLQuestionDB>.Instance.add(new data.Question
                         (
@@ -76,13 +76,15 @@ namespace TMS.model
                             this.checkbIsFowAnswer.IsChecked.Value,
                             this.checkbIsDraft.IsChecked.Value
                         )
-                     );
-                    MessageBox.Show("Save complite.");
-                    this.txtbBody.Clear();
-                    this.checkbIsFowAnswer.IsChecked = false;
-                    this.checkbIsDraft.IsChecked = false;
+                        );
                 }
+                MessageBox.Show("Save complite.");
+                this.txtbBody.Clear();
+                this.checkbIsFowAnswer.IsChecked = false;
+                this.checkbIsDraft.IsChecked = false;
             }
+            else
+                MessageBox.Show("Field \"Body question\" bіt be filled!");
         }
     }
 }

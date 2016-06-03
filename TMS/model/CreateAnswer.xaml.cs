@@ -55,23 +55,23 @@ namespace TMS.model
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (this.isEdit)
+            if (!String.IsNullOrWhiteSpace(this.txtbBody.Text))
             {
-                dao.Manager<db.XMLAnswerDB>.Instance.update(new data.Answer(
-                            this.AnswerId,
-                            this.txtbBody.Text,
-                            this.checkbIsCorrect.IsChecked.Value,
-                            this.QuestionId,
-                            this.checkbIsDraft.IsChecked.Value
-                        )
-                );
+                if (this.isEdit)
+                {
+                    dao.Manager<db.XMLAnswerDB>.Instance.update(new data.Answer(
+                                this.AnswerId,
+                                this.txtbBody.Text,
+                                this.checkbIsCorrect.IsChecked.Value,
+                                this.QuestionId,
+                                this.checkbIsDraft.IsChecked.Value
+                            )
+                    );
 
-                MessageBox.Show("Save complite.");
-                this.Close();
-            }
-            else
-            {
-                if (!String.IsNullOrWhiteSpace(this.txtbBody.Text))
+                    MessageBox.Show("Save complite.");
+                    this.Close();
+                }
+                else
                 {
                     dao.Manager<db.XMLAnswerDB>.Instance.add(new data.Answer(
                             -1,
@@ -82,12 +82,14 @@ namespace TMS.model
                         )
 
                     );
-                    MessageBox.Show("Save complite.");
-                    this.txtbBody.Clear();
-                    this.checkbIsCorrect.IsChecked = false;
-                    this.checkbIsDraft.IsChecked = false;
                 }
+                MessageBox.Show("Save complite.");
+                this.txtbBody.Clear();
+                this.checkbIsCorrect.IsChecked = false;
+                this.checkbIsDraft.IsChecked = false;
             }
+            else
+                MessageBox.Show("Field \"Body answer\" bіt be filled!");
         }
     }
 }
