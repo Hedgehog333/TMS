@@ -226,20 +226,8 @@ namespace TMS.model
 
         private void btnShowResultsClick(object sender, RoutedEventArgs e)
         {
-            switch(CurrentUserSingleton.Instance.User.role)
-            {
-		        case data.ERoles.student:
-                   
-
-
-                    break;
-                default:
-
-
-
-                    break;
-	        }
+            ShowResult SR = new ShowResult();
+            SR.ShowDialog();
         }
-
     }
 }
