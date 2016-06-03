@@ -28,6 +28,7 @@
                 <Button Name="btnCrateTest" Content="Create test" Width="129" Height="32" Margin="5" Click="btnCrateTestClick"/>
                 <Button Name="btnDeleteGroup" Content="Delete group" Width="129" Height="32" Margin="5" Click="btnDeleteGroupClick"/>
                 <Button Name="btnDeleteCategory" Content="Delete category" Width="129" Height="32" Margin="5" Click="btnDeleteCategoryClick"/>
+                <Button Name="btnShowUsers" Content="Show users" Width="129" Height="32" Margin="5" Click="btnShowUsersClick"/>
                 <Button Name="btnRefreshTests" Content="Refresh tests" Width="129" Height="32" Margin="5" Click="btnRefreshTestsClick"/>
                 <Button Name="btnShowResults" Content="Show results" Width="129" Height="32" Margin="5" Click="btnShowResultsClick"/>
 

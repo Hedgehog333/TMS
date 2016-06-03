@@ -25,19 +25,22 @@ namespace TMS.model
             InitializeComponent();
             this.Wellcome.Content += CurrentUserSingleton.Instance.User.lName + " " + CurrentUserSingleton.Instance.User.fName;
 
+            DependencyObject parent = VisualTreeHelper.GetParent(this.btnCreateGroup);
             if(CurrentUserSingleton.Instance.User.role.Equals(data.ERoles.student))
             {
                 this.btnCreateGroup.Visibility = System.Windows.Visibility.Hidden;
                 this.btnCrateCategoriesTest.Visibility = System.Windows.Visibility.Hidden;
                 this.btnCrateTest.Visibility = System.Windows.Visibility.Hidden;
 
-                DependencyObject parent = VisualTreeHelper.GetParent(this.btnCreateGroup);
                 (parent as StackPanel).Children.Remove(this.btnCreateGroup);
                 (parent as StackPanel).Children.Remove(this.btnCrateCategoriesTest);
                 (parent as StackPanel).Children.Remove(this.btnCrateTest);
                 (parent as StackPanel).Children.Remove(this.btnDeleteCategory);
                 (parent as StackPanel).Children.Remove(this.btnDeleteGroup);
             }
+            if (CurrentUserSingleton.Instance.User.role != data.ERoles.admin)
+                (parent as StackPanel).Children.Remove(this.btnShowUsers);
+
             this.RefreshTests();
         }
 
@@ -228,6 +231,12 @@ namespace TMS.model
         {
             ShowResult SR = new ShowResult();
             SR.ShowDialog();
+        }
+
+        private void btnShowUsersClick(object sender, RoutedEventArgs e)
+        {
+            ShowUsers SU = new ShowUsers();
+            SU.ShowDialog();
         }
     }
 }
