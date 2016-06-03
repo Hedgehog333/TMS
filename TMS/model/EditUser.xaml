@@ -1,0 +1,34 @@
+﻿<Window x:Class="TMS.model.EditUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EditUser" Height="462" Width="408">
+    <StackPanel Margin="20 0" >
+        <Label Content="First Name*" />
+        <TextBox Height="27" TextWrapping="Wrap" Name="txtbFName"/>
+        <Label Content="Last Name*"/>
+        <TextBox Height="27" TextWrapping="Wrap" Name="txtbLName"/>
+        <Label Content="Second Name"/>
+        <TextBox Height="27" TextWrapping="Wrap" Name="txtbSName"/>
+        <Label Content="Login*"/>
+        <TextBox Height="27" TextWrapping="Wrap" Name="txtbEmail"/>
+        <Label Content="Group*"/>
+        <ComboBox Name="cboxGroup" />
+        <Label Content="Role*"/>
+        <ComboBox Name="cboxRole">
+            <TextBlock>Admin</TextBlock>
+            <TextBlock>Teacher</TextBlock>
+            <TextBlock>Student</TextBlock>
+        </ComboBox>
+        <Label Content="Password*"/>
+        <PasswordBox Height="27" Name="pasPassword"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Content="Go Back" Height="35" Cursor="Hand" Margin="0,10,0,0"  Click="btnGoBackClick" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Width="109"/>
+            <Button HorizontalAlignment="Right" Content="Save" Height="35" Cursor="Hand" Width="109" Margin="0,10,0,0" Click="btnSignUpClick" Grid.Row="0" Grid.Column="3"/>
+        </Grid>
+    </StackPanel>
+</Window>
